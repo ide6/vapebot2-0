@@ -1,0 +1,15 @@
+# Пример настройки crontab для автоматических задач
+# Откройте crontab: crontab -e
+# Добавьте следующие строки:
+
+# Резервное копирование каждый день в 2:00
+0 2 * * * /home/vapebot/vape_shop_bot/backup.sh >> /home/vapebot/backup.log 2>&1
+
+# Очистка старых логов каждую неделю в воскресенье в 3:00
+0 3 * * 0 find /home/vapebot/vape_shop_bot/logs -name "*.log" -mtime +7 -delete
+
+# Перезапуск бота каждую неделю в понедельник в 4:00 (для обновлений)
+0 4 * * 1 systemctl restart vapebot
+
+# Проверка статуса бота каждый час
+0 * * * * systemctl is-active --quiet vapebot || systemctl restart vapebot

@@ -1,0 +1,15 @@
+[Unit]
+Description=Soft Vape Bot
+After=network.target
+
+[Service]
+Type=simple
+User=vapebot
+WorkingDirectory=/home/vapebot/vape_shop_bot
+Environment=PATH=/home/vapebot/vape_shop_bot/venv/bin
+ExecStart=/home/vapebot/vape_shop_bot/venv/bin/python main.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
